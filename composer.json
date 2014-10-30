@@ -1,0 +1,23 @@
+{
+    "name": "daimos/entity-changes-fetcher",
+    "type": "library",
+    "description": "Small library that shows changes made to entity",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kamil Kopaczyk"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "require-dev": {
+        "doctrine/orm": "~2.1",
+        "doctrine/data-fixtures": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Daimos\\ChangesFetcher\\": ""
+        }
+    }
+}
