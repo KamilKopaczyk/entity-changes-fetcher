@@ -69,6 +69,8 @@ class DoctrineAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('username', $changes);
         $this->assertNull($changes['username'][0]);
         $this->assertEquals($testValue, $changes['username'][1]);
+
+        return $user;
     }
 
     public function testChange_ScalarToScalar()
@@ -171,5 +173,29 @@ class DoctrineAdapterTest extends \PHPUnit_Framework_TestCase
         $changes = $this->changesFetcher->getChanges($user);
 
         $this->assertEmpty($changes);
+    }
+
+    /**
+     * @depends testChange_NullToScalar
+     */
+    public function testChange_ChangeAfterComputingChangeSets(User $user)
+    {
+        $testRoleName = 'testRole';
+
+        $user->setRole(new Role($testRoleName));
+
+        $changes = $this->changesFetcher->getChanges($user);
+
+        $this->assertArrayHasKey('role', $changes);
+        $this->assertNull($changes['role'][0]);
+
+        $changedRole = $changes['role'][1];
+
+        $this->assertTrue($changedRole instanceof Role);
+        $this->assertEquals($testRoleName, $changedRole->getName());
+
+        $this->assertArrayHasKey('username', $changes);
+        $this->assertNull($changes['username'][0]);
+        $this->assertNotEmpty($changes['username'][1]);
     }
 }
