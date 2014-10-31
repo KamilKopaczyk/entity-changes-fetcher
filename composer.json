@@ -12,8 +12,7 @@
         "php": ">=5.3.2"
     },
     "require-dev": {
-        "doctrine/orm": "~2.1",
-        "doctrine/data-fixtures": "~1.0"
+        "doctrine/orm": "~2.1"
     },
     "autoload": {
         "psr-4": {
