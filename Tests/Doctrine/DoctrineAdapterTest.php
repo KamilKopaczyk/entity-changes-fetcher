@@ -62,7 +62,12 @@ class DoctrineAdapterTest extends \PHPUnit_Framework_TestCase
     {
         $testValue = 'testUsername';
 
-        $user = new User($testValue);
+        $user = new User(null);
+
+        $this->em->persist($user);
+        $this->em->flush();
+
+        $user->setUsername($testValue);
 
         $changes = $this->changesFetcher->getChanges($user);
 
@@ -117,7 +122,12 @@ class DoctrineAdapterTest extends \PHPUnit_Framework_TestCase
 
         $newRole = new Role($newRoleName);
 
-        $user = new User('testUser', $newRole);
+        $user = new User('testUser');
+
+        $this->em->persist($user);
+        $this->em->flush();
+
+        $user->setRole($newRole);
 
         $changes = $this->changesFetcher->getChanges($user);
 

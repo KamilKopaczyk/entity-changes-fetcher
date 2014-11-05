@@ -24,7 +24,9 @@ class DoctrineChangesFetcher implements ChangesFetcher
         $uow = $this->entityManager->getUnitOfWork();
 
         try {
-            $classMetaData = $this->entityManager->getClassMetadata(get_class($entity));
+            if($uow->getEntityState($entity) === UnitOfWork::STATE_NEW) {
+                return array();
+            }
         }
         catch(\Doctrine\ORM\Mapping\MappingException $e) {
             return array();
@@ -32,6 +34,8 @@ class DoctrineChangesFetcher implements ChangesFetcher
         catch(\Doctrine\Common\Persistence\Mapping\MappingException $e) {
             return array();
         }
+
+        $classMetaData = $this->entityManager->getClassMetadata(get_class($entity));
 
         $uow->computeChangeSet($classMetaData, $entity);
 
