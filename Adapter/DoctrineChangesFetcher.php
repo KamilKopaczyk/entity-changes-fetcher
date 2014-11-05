@@ -6,6 +6,7 @@ namespace Daimos\ChangesFetcher\Adapter;
 
 use Daimos\ChangesFetcher\ChangesFetcher;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\MappingException;
 use Doctrine\ORM\UnitOfWork;
 
 class DoctrineChangesFetcher implements ChangesFetcher
@@ -23,7 +24,13 @@ class DoctrineChangesFetcher implements ChangesFetcher
         /** @var UnitOfWork $uow */
         $uow = $this->entityManager->getUnitOfWork();
 
-        $classMetaData = $this->entityManager->getClassMetadata(get_class($entity));
+        try {
+            $classMetaData = $this->entityManager->getClassMetadata(get_class($entity));
+        }
+        catch(MappingException $e) {
+            return array();
+        }
+
         $uow->computeChangeSet($classMetaData, $entity);
 
         $changes = $uow->getEntityChangeSet($entity);

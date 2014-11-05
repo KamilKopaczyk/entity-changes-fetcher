@@ -198,4 +198,12 @@ class DoctrineAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($changes['username'][0]);
         $this->assertNotEmpty($changes['username'][1]);
     }
+
+    public function testChange_unregisteredObject() {
+        $object = new \stdClass();
+
+        $changes = $this->changesFetcher->getChanges($object);
+
+        $this->assertEmpty($changes);
+    }
 }
