@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Daimos\Tests\Doctrine\Entity;
+namespace Daimos\ChangesFetcher\Tests\Doctrine\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

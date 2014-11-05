@@ -1,10 +1,10 @@
 <?php
 
-namespace Daimos\Tests\Doctrine;
+namespace Daimos\ChangesFetcher\Tests\Doctrine;
 
 use Daimos\ChangesFetcher\Adapter\DoctrineChangesFetcher;
-use Daimos\Tests\Doctrine\Entity\Role;
-use Daimos\Tests\Doctrine\Entity\User;
+use Daimos\ChangesFetcher\Tests\Doctrine\Entity\Role;
+use Daimos\ChangesFetcher\Tests\Doctrine\Entity\User;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
