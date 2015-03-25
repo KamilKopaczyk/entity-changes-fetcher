@@ -41,9 +41,6 @@ class DoctrineChangesFetcher implements ChangesFetcher
 
         $changes = $uow->getEntityChangeSet($entity);
 
-        # Clear ChangeSet so it can be recomputed when flushing
-        $uow->clearEntityChangeSet(spl_object_hash($entity));
-
         return $changes;
     }
 }
